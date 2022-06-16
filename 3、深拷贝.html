@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function deepClone(source){
+      //先判断数据类型是否为基本数据类型
+      const isPrimitive=(value)=>{
+        return /Number|String|Boolean|Function|Null|Undefined|Symbol/.test(Object.prototype.toString.call(source))
+      }
+
+      const checkType=(source)=>{
+        return Object.prototype.toString.call(source)
+      }
+
+      let res=null
+      //如果数据为基本数据类型
+      if(isPrimitive(source)){
+        res=source
+      }else if(checkType(source)=='[object Date]'){
+        res=new Date(source)
+      }else if(checkType(source)=='[object RegExp]'){
+        res=new RegExp(source)
+      }else if(checkType(source)=='[object Set]'){
+        //如果为set，还需要对每一项进行deepclone
+        res=new Set()
+        for(let v of source){
+          res.add(deepClone(v))
+        }
+      }else if(checkType(source)=='[object Map]'){
+        res=new Map()
+        for(let [key,value] of source.entires()){
+          res.set(key,deepClone(value))
+        }
+      }else if(checkType(source)=='[object Array]'){
+        res=[]
+        source.forEach((value,index) => {
+          res[index]=value
+        });
+      }else if(checkType(source)=='[object Object]'){
+        res={}
+        Object.entires(source).forEach((key,value)=>{
+          res[key]=deepClone(value)
+        })
+      }
+    }
+  </script>
+</body>
+</html>
