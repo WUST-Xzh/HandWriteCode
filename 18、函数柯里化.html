@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //将参数存放在数组中
+    function sum(){
+      let args=[...arguments]
+      const add=()=>{
+        args.push(...arguments)
+        return add
+      }
+      //调用toString方法获取结果
+      add.toString=()=>args.reduce((a,b)=>a+b,0)
+      return add
+    }
+    console.log(sum(1,2)(3).toString());
+    
+  </script>
+  
+</body>
+</html>

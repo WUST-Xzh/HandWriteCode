@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Function.prototype.mycall=function(context){
+      //首先判断是否this是否为一个函数
+      if(typeof this!=='Function'){
+         throw new Error('error')
+      }
+      //是否传了context
+      context=context||window
+      //获取传入进来的参数
+      var args=[...arguments].slice(1)
+      context.fn=this
+      var result=context.fn(...args)
+      return result
+    }
+  </script>
+  
+</body>
+</html>

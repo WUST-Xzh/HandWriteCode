@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //定义发布者
+    var shoeObj = {}
+    //定义一个列表用于存放函数
+    shoeObj.list = []
+
+    //增加订阅者
+    shoeObj.listen = function (key,fn) {
+      if(!this.list[key]){
+        this.list[key]=[]
+      }
+      shoeObj.list[key].push(fn)
+    }
+    //发布消息
+    shoeObj.trigger = function () {
+      var key=Array.prototype.shift.call(arguments)
+      var fns=this.list[key]
+
+      if(!fns || fns==0){
+        return
+      }
+        for (var i = 0; i < shoeObj.list[key].length; i++) {
+        var fn = shoeObj.list[key][i]
+        fn.apply(this, arguments)
+        }
+      
+    }
+
+
+    shoeObj.listen('red',function (color, size) {
+      console.log(`${color} and ${size}`);
+    })
+
+    shoeObj.listen('black',function (color, size) {
+      console.log(`Again ${color} and ${size}`);
+    })
+    shoeObj.trigger('red', 40)
+    shoeObj.trigger('black', 30)
+  </script>
+</body>
+
+</html>

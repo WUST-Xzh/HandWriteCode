@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <script>
+    let map={}
+    let res=[]
+    var node=[...document.querySelectorAll('*')]
+    var tagNames=node.map(item=>{
+      return item.tagName
+    })
+    tagNames.forEach(item => {
+      if(map[item]){
+        map[item]+=1
+      }else{
+        map[item]=1
+      }
+    });
+    for(let v in map){
+      if(map[v]===1){
+        res.push(v)
+      }
+    }
+    console.log(res);
+  </script>
+</body>
+</html>

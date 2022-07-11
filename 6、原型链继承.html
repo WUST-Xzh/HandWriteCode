@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(){
+      this.name='xie'
+    }
+    Person.prototype.getName=function(){
+      console.log(this.name);
+    }
+
+    function Child(){
+      this.age=24
+    }
+    Child.prototype=new Person()
+
+    const son=new Child() 
+    console.log(son.getName());
+  </script>
+  
+</body>
+</html>

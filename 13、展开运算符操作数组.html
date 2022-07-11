@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   var obj={x:1,y:2,z:3}
+   obj[Symbol.iterator]=function(){
+      return {
+        next:function(){
+          let objArr=Reflect.ownKeys(obj)  //symbol作为对象键名时，使用object.keys是无法遍历出来的
+          if(this.index<objArr.length-1){
+            let key=objArr[this.index]
+            this.index++
+            return {
+              value:obj[key]
+            }
+          }else{
+            return {
+              done: true
+            }
+          }
+
+        },
+        index:0
+      }
+   }
+   
+    console.log([...obj]);
+  </script>
+  
+</body>
+</html>

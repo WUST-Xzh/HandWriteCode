@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //计算出现次数
+    // let name=['xie','zi','han','xie']
+    // var obj=name.reduce((prev,cur)=>{
+    //   console.log(prev);
+    //   if(prev[cur]){
+    //     prev[cur]++
+    //   }else{
+    //     prev[cur]=1
+    //   }
+    //   return prev
+    // },{})
+    // console.log(obj);
+
+    //去重
+    // let arr=[1,2,3,1,2,3,4,5,6]
+
+    // var arr1=arr.reduce((pre,cur)=>{
+    //   if(!pre.includes(cur)){
+    //     pre.push(cur) 
+    //   }
+    //   return pre
+    // },[])
+    // console.log(arr1);
+
+    //将多维数组转化为一维数组
+    let arr=[[1,2,3,4],[[22,33,[22]],2],5]
+    function flatten(arr){
+      let len=arr.length
+      let res=[]
+      for(let i=0;i<len;i++){
+        //如果为数组，则需要再次展平
+        if(Array.isArray(arr[i])){
+          var newArr=flatten(arr[i])
+          res.push(...newArr)
+        }else{
+          res.push(arr[i])
+        }
+      }
+      return res
+    }
+    console.log(flatten(arr));
+
+  </script>
+  
+</body>
+</html>
